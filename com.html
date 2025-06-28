@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Editor</title>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", sans-serif;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: #454545;
+      color: #fff;
+    }
+    .container {
+      width: 100%;
+      height: 100vh;
+      padding: 20px;
+      display: flex;
+    }
+
+    .left,
+    .right {
+      flex-basis: 50%;
+      padding: 10px;
+    }
+    textarea {
+      width: 100%;
+      height: 28%;
+      background-color: #1f1f1f;
+      color: #fff;
+      padding: 10px 20px;
+      border: 0;
+      outline: 0;
+      font-size: 18px;
+    }
+    iframe {
+      width: 100%;
+      height: 95vh;
+      background-color: #fff;
+      border: 0;
+      outline: 0;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <div class="left">
+        <label>HTML</label>
+        <textarea id="html-code" onkeyup="run()"></textarea><br />
+        <label>CSS</label>
+        <textarea id="Css-code" onkeyup="run()"></textarea><br />
+        <label>JS</label>
+        <textarea id="JS-code" onkeyup="run()"></textarea>
+      </div>
+      <div class="right">
+        <iframe id="output"></iframe>
+      </div>
+    </div>
+
+    <script>
+      function run() {
+        let htmlcode = document.getElementById("html-code").value;
+        let CssCode = document.getElementById("Css-code").value;
+        let jsCode = document.getElementById("JS-code").value;
+        let output = document.getElementById("output");
+
+        output.contentDocument.body.innerHTML =
+          htmlcode + "<style>" + CssCode + "</style>";
+
+        output.contentWindow.eval(jsCode);
+      }
+    </script>
+  </body>
+</html>
